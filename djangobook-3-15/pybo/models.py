@@ -30,3 +30,4 @@ class Comment(models.Model):
     modify_date = models.DateTimeField(null=True, blank=True)
     question = models.ForeignKey(Question, null=True, blank=True, on_delete=models.CASCADE)
     answer = models.ForeignKey(Answer, null=True, blank=True, on_delete=models.CASCADE)
+    modify_count = models.IntegerField(default=0) # 댓글 수정 횟수를 나타내는 필드 추가
