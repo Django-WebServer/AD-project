@@ -9,6 +9,7 @@ class Question(models.Model):
     create_date = models.DateTimeField()
     modify_date = models.DateTimeField(null=True, blank=True)
     voter = models.ManyToManyField(User, related_name='voter_question')
+    modify_count = models.IntegerField(default=0) # 질문 수정 횟수를 나타내는 필드 추가
 
     def __str__(self):
         return self.subject
@@ -21,6 +22,7 @@ class Answer(models.Model):
     create_date = models.DateTimeField()
     modify_date = models.DateTimeField(null=True, blank=True)
     voter = models.ManyToManyField(User, related_name='voter_answer')
+    modify_count = models.IntegerField(default=0) # 답변 수정 횟수를 나타내는 필드 추가
 
 
 class Comment(models.Model):
