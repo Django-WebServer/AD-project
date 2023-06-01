@@ -32,3 +32,4 @@ class Comment(models.Model):
     answer = models.ForeignKey(Answer, null=True, blank=True, on_delete=models.CASCADE)
     voter = models.ManyToManyField(User, related_name='voter_comment')
     modify_count = models.IntegerField(default=0)  # 댓글 수정 횟수를 나타내는 필드 추가
+
