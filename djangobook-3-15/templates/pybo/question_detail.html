@@ -48,9 +48,11 @@
                     {% for comment in comment_list %}
                         <a name="comment_{{ comment.id }}"></a>
                         <div class="comment py-2 text-muted">
+                            <!-- 질문 댓글 추천 수 표시 Start -->
                             {% if comment.voter.count > 0 %}
                                 <span class="badge badge-warning px-2 py-1">{{ comment.voter.count }}</span>
                             {% endif %}
+                            <!-- 질문 댓글 추천 수 표시 End -->
                             <span style="white-space: pre-line;">{{ comment.content }}</span>
                             <span>
                                 - {{ comment.author }}, {{ comment.create_date }}
@@ -63,8 +65,10 @@
                             <a href="#" class="small delete"
                                data-uri="{% url 'pybo:comment_delete_question' comment.id  %}">삭제</a>,
                             {% endif %}
+                            <!-- 질문 댓글 추천 버튼 Start -->
                             <a href="#" data-uri="{% url 'pybo:vote_question_comment' comment.id  %}"
                                 class="recommend small">추천</a>
+                            <!-- 질문 댓글 추천 버튼 End -->
                         </div>
                     {% endfor %}
                     </div>
@@ -113,9 +117,6 @@
                 </ul>
                 <!-- 페이징 처리 끝 -->
                 </div>
-
-                
-
             </div>
         </div>
     </div>
@@ -157,9 +158,11 @@
                     {% for comment in answer.comment_set.all %}
                         <a name="comment_{{ comment.id }}"></a>
                         <div class="comment py-2 text-muted">
+                            <!-- 답변 댓글 추천 수 표시 Start -->
                             {% if comment.voter.count > 0 %}
                                 <span class="badge badge-warning px-2 py-1">{{ comment.voter.count }}</span>
                             {% endif %}
+                            <!-- 답변 댓글 추천 수 표시 End -->
                             <span style="white-space: pre-line;">{{ comment.content }}</span>
                             <span>
                                 - {{ comment.author }}, {{ comment.create_date }}
@@ -172,8 +175,10 @@
                             <a href="#" class="small delete"
                                data-uri="{% url 'pybo:comment_delete_answer' comment.id  %}">삭제</a>,
                             {% endif %}
+                            <!-- 답변 댓글 추천 버튼 Start -->
                             <a href="#" data-uri="{% url 'pybo:vote_answer_comment' comment.id  %}"
                                 class="recommend small">추천</a>
+                            <!-- 답변 댓글 추천 버튼 End -->
                         </div>
                     {% endfor %}
                     </div>

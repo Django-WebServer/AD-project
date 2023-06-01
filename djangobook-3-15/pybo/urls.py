@@ -30,6 +30,6 @@ urlpatterns = [
     # vote_views.py
     path('vote/question/<int:question_id>/', vote_views.vote_question, name='vote_question'),
     path('vote/answer/<int:answer_id>/', vote_views.vote_answer, name='vote_answer'),
-    path('vote/question/comment/<int:comment_id>/', vote_views.vote_question_comment, name='vote_question_comment'),
-    path('vote/answer/comment/<int:comment_id>/', vote_views.vote_answer_comment, name='vote_answer_comment'),
+    path('vote/question/comment/<int:comment_id>/', vote_views.vote_question_comment, name='vote_question_comment'),  # 질문 댓글 추천 url 매핑 추가
+    path('vote/answer/comment/<int:comment_id>/', vote_views.vote_answer_comment, name='vote_answer_comment'),  # 답변 댓글 추천 url 매핑 추가
 ]
