@@ -2,7 +2,7 @@ from django.core.paginator import Paginator
 from django.db.models import Q, Count
 from django.shortcuts import render, get_object_or_404
 
-from ..models import Question
+from ..models import Question, Comment
 
 
 def index(request):
@@ -44,5 +44,12 @@ def detail(request, question_id):
     pybo 내용 출력
     """
     question = get_object_or_404(Question, pk=question_id)
-    context = {'question': question}
+    page = request.GET.get('page', '1') #페이지
+
+    comment = Comment.objects.filter(question_id = question_id) #현재 question에 해당하는 comment들 DB에서 추출하기
+    comment_list = comment.order_by('-create_date') # 최신 생성순으로 정렬
+    paginator = Paginator(comment_list, 5) # 페이지당 5개씩 보여주기
+    comment_obj = paginator.get_page(page) #현재 페이지에 해당하는 데이터 '5'개 담기
+
+    context = {'question': question, 'comment_list': comment_obj}
     return render(request, 'pybo/question_detail.html', context)
