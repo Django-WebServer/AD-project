@@ -45,11 +45,17 @@ def detail(request, question_id):
     """
     question = get_object_or_404(Question, pk=question_id)
     page = request.GET.get('page', '1') #페이지
-
+    so = request.GET.get('so', 'recent')  # 정렬기준
     comment = Comment.objects.filter(question_id = question_id) #현재 question에 해당하는 comment들 DB에서 추출하기
-    comment_list = comment.order_by('-create_date') # 최신 생성순으로 정렬
+    
+    # 정렬
+    if so == 'recommend':
+        comment_list = comment.annotate(num_voter=Count('voter')).order_by('-num_voter', '-create_date')
+    else:  # recent
+        comment_list = comment.order_by('-create_date')
+
     paginator = Paginator(comment_list, 5) # 페이지당 5개씩 보여주기
     comment_obj = paginator.get_page(page) #현재 페이지에 해당하는 데이터 '5'개 담기
 
-    context = {'question': question, 'comment_list': comment_obj}
+    context = {'question': question, 'comment_list': comment_obj, 'so': so}
     return render(request, 'pybo/question_detail.html', context)
